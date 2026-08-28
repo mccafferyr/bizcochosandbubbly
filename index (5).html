@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bizcochos &amp; Bubbly — Juan's 41st Birthday</title>
+<meta name="description" content="Join us for Bizcochos & Bubbly, celebrating Juan's 41st birthday. Sunday, September 6, 10am–12pm.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23FBF6EC'/%3E%3Cg fill='%23F0B429'%3E%3Cg id='r'%3E%3Cpath d='M32 6 L36 18 L28 18 Z'/%3E%3C/g%3E%3Cuse href='%23r' transform='rotate(45 32 32)'/%3E%3Cuse href='%23r' transform='rotate(90 32 32)'/%3E%3Cuse href='%23r' transform='rotate(135 32 32)'/%3E%3Cuse href='%23r' transform='rotate(180 32 32)'/%3E%3Cuse href='%23r' transform='rotate(225 32 32)'/%3E%3Cuse href='%23r' transform='rotate(270 32 32)'/%3E%3Cuse href='%23r' transform='rotate(315 32 32)'/%3E%3Ccircle cx='32' cy='32' r='15'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky:#5B9BD5;
+    --sky-deep:#3B7BB8;
+    --sun:#F0B429;
+    --sun-deep:#D99A1E;
+    --cream:#FBF6EC;
+    --paper:#FFFFFF;
+    --ink:#1E3A5F;
+    --ink-soft:#4A6280;
+    --line: rgba(30,58,95,0.14);
+    --radius: 18px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Work Sans', -apple-system, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .rise{
+      animation: rise 0.9s cubic-bezier(.22,.9,.3,1) both;
+    }
+    @keyframes rise{
+      from{opacity:0; transform:translateY(14px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+  }
+
+  a{color:inherit;}
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--sky-deep);
+    outline-offset:3px;
+  }
+
+  /* Flag stripe divider */
+  .stripes{
+    height:16px;
+    width:100%;
+    background: repeating-linear-gradient(
+      to right,
+      var(--sky) 0px, var(--sky) 40px,
+      var(--paper) 40px, var(--paper) 80px
+    );
+  }
+
+  header.hero{
+    position:relative;
+    padding: 76px 24px 70px;
+    text-align:center;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% -10%, rgba(255,255,255,0.14), transparent 55%),
+      linear-gradient(180deg, var(--sky-deep) 0%, var(--sky) 68%, var(--cream) 100%);
+  }
+
+  /* Faint Uruguay-flag stripe texture behind the hero content */
+  .hero-stripes{
+    position:absolute;
+    inset:0;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.10) 0px, rgba(255,255,255,0.10) 14px,
+      transparent 14px, transparent 42px
+    );
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* Champagne bubbles rising through the blue */
+  .bubbles{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    overflow:hidden;
+  }
+  .bubble{
+    position:absolute;
+    bottom:-24px;
+    border-radius:50%;
+    background: radial-gradient(circle at 30% 26%, rgba(255,255,255,0.95), rgba(255,255,255,0.15) 55%, rgba(255,255,255,0.05) 100%);
+    border:1px solid rgba(255,255,255,0.4);
+    opacity:0;
+  }
+
+  .bubble.b1 { left:6%;  width:7px;  height:7px; }
+  .bubble.b2 { left:13%; width:11px; height:11px;}
+  .bubble.b3 { left:20%; width:5px;  height:5px; }
+  .bubble.b4 { left:28%; width:9px;  height:9px; }
+  .bubble.b5 { left:37%; width:6px;  height:6px; }
+  .bubble.b6 { left:45%; width:12px; height:12px;}
+  .bubble.b7 { left:53%; width:5px;  height:5px; }
+  .bubble.b8 { left:61%; width:8px;  height:8px; }
+  .bubble.b9 { left:69%; width:10px; height:10px;}
+  .bubble.b10{ left:77%; width:6px;  height:6px; }
+  .bubble.b11{ left:85%; width:9px;  height:9px; }
+  .bubble.b12{ left:92%; width:7px;  height:7px; }
+
+  @media (prefers-reduced-motion: no-preference){
+    .bubble{ animation: champagne-rise linear infinite; }
+    .bubble.b1 { --drift:6px;   animation-duration:6.5s; animation-delay:0s;   }
+    .bubble.b2 { --drift:-8px;  animation-duration:5.2s; animation-delay:1.1s; }
+    .bubble.b3 { --drift:4px;   animation-duration:7.8s; animation-delay:2.4s; }
+    .bubble.b4 { --drift:-5px;  animation-duration:5.8s; animation-delay:0.4s; }
+    .bubble.b5 { --drift:7px;   animation-duration:6.9s; animation-delay:3.1s; }
+    .bubble.b6 { --drift:-9px;  animation-duration:5s;   animation-delay:1.8s; }
+    .bubble.b7 { --drift:5px;   animation-duration:7.2s; animation-delay:0.9s; }
+    .bubble.b8 { --drift:-6px;  animation-duration:6.1s; animation-delay:2.9s; }
+    .bubble.b9 { --drift:8px;   animation-duration:5.6s; animation-delay:0.2s; }
+    .bubble.b10{ --drift:-4px;  animation-duration:7.4s; animation-delay:3.6s; }
+    .bubble.b11{ --drift:6px;   animation-duration:6.3s; animation-delay:1.4s; }
+    .bubble.b12{ --drift:-7px;  animation-duration:5.4s; animation-delay:2.1s; }
+
+    @keyframes champagne-rise{
+      0%{
+        transform: translate(0, 0) scale(0.7);
+        opacity:0;
+      }
+      8%{
+        opacity:0.9;
+      }
+      75%{
+        opacity:0.6;
+      }
+      100%{
+        transform: translate(var(--drift, 6px), -300px) scale(1);
+        opacity:0;
+      }
+    }
+  }
+
+  header.hero > :not(.hero-stripes):not(.bubbles){ position:relative; z-index:2; }
+
+  .sun-wrap{
+    width:132px;
+    height:132px;
+    margin: 0 auto 28px;
+  }
+
+  #rays{
+    transform-origin: 100px 100px;
+  }
+  .sun-core{
+    transform-origin: 100px 100px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    #rays{
+      animation: spin 40s linear infinite;
+    }
+    .sun-core{
+      animation: pulse 3.5s ease-in-out infinite;
+    }
+    @keyframes spin{
+      from{ transform: rotate(0deg); }
+      to{ transform: rotate(360deg); }
+    }
+    @keyframes pulse{
+      0%, 100%{ transform: scale(1); }
+      50%{ transform: scale(1.045); }
+    }
+  }
+
+  .eyebrow{
+    display:inline-block;
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-size:12.5px;
+    color:var(--cream);
+    background: rgba(255,255,255,0.16);
+    border:1px solid rgba(255,255,255,0.4);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:22px;
+  }
+
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    line-height:1.02;
+    margin:0 0 6px;
+    letter-spacing:-0.01em;
+    color:var(--cream);
+  }
+  h1.title .amp{
+    color:var(--sun);
+    font-style:italic;
+    font-weight:500;
+  }
+
+  .subtitle{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+    color: rgba(251,246,236,0.85);
+    margin: 4px 0 0;
+  }
+
+  main{
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px 100px;
+  }
+
+  .card{
+    background:var(--paper);
+    border-radius: var(--radius);
+    border:1px solid var(--line);
+    border-top: 4px solid var(--sky);
+    box-shadow: 0 1px 2px rgba(30,58,95,0.05), 0 12px 32px -18px rgba(30,58,95,0.28);
+    margin-top: -36px;
+    padding: 40px clamp(22px, 6vw, 48px) 8px;
+    position:relative;
+    z-index:2;
+  }
+
+  .detail-row{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    padding: 22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .detail-row:last-of-type{ border-bottom:none; }
+
+  .detail-icon{
+    flex:0 0 auto;
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background: rgba(240,180,41,0.14);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .detail-icon svg{ width:22px; height:22px; }
+
+  .detail-label{
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color: var(--sky-deep);
+    margin:0 0 4px;
+  }
+  .detail-value{
+    font-family:'Fraunces', serif;
+    font-size:1.28rem;
+    font-weight:500;
+    margin:0;
+    color:var(--ink);
+    line-height:1.3;
+  }
+  .detail-sub{
+    margin:4px 0 0;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+  }
+  .detail-sub a{ text-decoration:underline; text-underline-offset:3px; }
+
+  .map-link{
+    text-decoration:none;
+    border-bottom: 1.5px dashed rgba(30,58,95,0.35);
+    cursor:pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .map-link:hover{
+    border-color: var(--sky-deep);
+    color: var(--sky-deep);
+  }
+
+  .note{
+    text-align:center;
+    font-size:0.98rem;
+    color:var(--ink-soft);
+    padding: 26px 8px 34px;
+    line-height:1.55;
+  }
+  .note strong{ color:var(--ink); font-weight:600; }
+
+  .rsvp-wrap{
+    text-align:center;
+    padding: 6px 0 4px;
+  }
+
+  .whatsapp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:#25D366;
+    color:#fff;
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:1.05rem;
+    text-decoration:none;
+    padding:16px 30px;
+    border-radius:999px;
+    box-shadow: 0 10px 24px -8px rgba(37,211,102,0.55);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .whatsapp-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px -8px rgba(37,211,102,0.6);
+  }
+  .whatsapp-btn svg{ width:22px; height:22px; flex:0 0 auto; }
+
+  .rsvp-caption{
+    margin: 16px 0 0;
+    font-size:0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .calendar-row{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top: 28px;
+  }
+
+  .calendar-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    background: var(--paper);
+    color: var(--sky-deep);
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    border: 1.5px solid var(--sky-deep);
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .calendar-btn:hover{
+    background: rgba(59,123,184,0.08);
+    transform: translateY(-1px);
+  }
+  .calendar-btn svg{ width:18px; height:18px; flex:0 0 auto; }
+
+  footer{
+    text-align:center;
+    padding: 40px 24px 52px;
+    margin-top: 20px;
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 10px,
+        transparent 10px, transparent 30px
+      ),
+      var(--sky-deep);
+    font-size:0.88rem;
+    color: rgba(251,246,236,0.85);
+  }
+  footer .sun-mini{
+    width:26px; height:26px; margin: 0 auto 12px;
+    opacity:0.9;
+  }
+
+  @media (max-width:480px){
+    header.hero{ padding: 56px 18px 52px; }
+    .card{ padding: 32px 20px 4px; }
+    .detail-row{ gap:14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-stripes" aria-hidden="true"></div>
+  <div class="bubbles" aria-hidden="true">
+    <span class="bubble b1"></span>
+    <span class="bubble b2"></span>
+    <span class="bubble b3"></span>
+    <span class="bubble b4"></span>
+    <span class="bubble b5"></span>
+    <span class="bubble b6"></span>
+    <span class="bubble b7"></span>
+    <span class="bubble b8"></span>
+    <span class="bubble b9"></span>
+    <span class="bubble b10"></span>
+    <span class="bubble b11"></span>
+    <span class="bubble b12"></span>
+  </div>
+
+  <div class="sun-wrap rise" aria-hidden="true">
+    <!-- Sol de Mayo, simplified -->
+    <svg viewBox="0 0 200 200" width="100%" height="100%">
+      <g>
+        <!-- rays -->
+        <g fill="var(--sun)">
+          <g id="rays"></g>
+        </g>
+        <g class="sun-core">
+          <circle cx="100" cy="100" r="46" fill="var(--sun)"/>
+          <circle cx="100" cy="100" r="46" fill="none" stroke="var(--sun-deep)" stroke-width="2" opacity="0.4"/>
+          <!-- simple face -->
+          <circle cx="84" cy="94" r="5.5" fill="var(--cream)"/>
+          <circle cx="116" cy="94" r="5.5" fill="var(--cream)"/>
+          <path d="M78 114 Q100 132 122 114" stroke="var(--cream)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <span class="eyebrow rise" style="animation-delay:0.05s">Please join us</span>
+  <h1 class="title rise" style="animation-delay:0.1s">Bizcochos <span class="amp">&amp;</span> Bubbly</h1>
+  <p class="subtitle rise" style="animation-delay:0.16s">Celebrating Juan's 41st Birthday</p>
+</header>
+
+<div class="stripes" role="presentation"></div>
+
+<main>
+  <div class="card rise" style="animation-delay:0.2s">
+
+    <div class="detail-row">
+      <div class="detail-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--sky-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+      </div>
+      <div>
+        <p class="detail-label">When</p>
+        <p class="detail-value">Sunday, September 6</p>
+        <p class="detail-sub">10:00 AM – 12:00 Noon</p>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--sky-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div>
+        <p class="detail-label">Where</p>
+        <a class="detail-value map-link" href="https://www.google.com/maps/search/?api=1&query=835+Harrison+Street+Hollywood+FL+33019" target="_blank" rel="noopener">
+          835 Harrison Street
+        </a>
+        <p class="detail-sub">Hollywood, FL 33019 · <a href="https://www.google.com/maps/search/?api=1&query=835+Harrison+Street+Hollywood+FL+33019" target="_blank" rel="noopener" style="text-decoration:underline; text-underline-offset:3px;">open in Maps</a></p>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--sky-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V6a2 2 0 0 1 2-2h9l5 5v10.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19.5Z"/><path d="M15 4v4a1 1 0 0 0 1 1h4"/></svg>
+      </div>
+      <div>
+        <p class="detail-label">What to expect</p>
+        <p class="detail-value">Bizcochos, mimosas, bellinis, coffee, and more!</p>
+      </div>
+    </div>
+
+    <p class="note">Come casual, come hungry. <strong>No gifts needed</strong> — just bring your appetite and help us send Juan into 41 the right way.</p>
+  </div>
+
+  <div class="rsvp-wrap">
+    <a
+      class="whatsapp-btn"
+      href="https://wa.me/19546183059?text=Hi%20Russ!%20I'd%20love%20to%20come%20to%20Bizcochos%20%26%20Bubbly%20for%20Juan's%2041st%20on%20Sept%206%E2%80%94count%20me%20in!"
+      target="_blank"
+      rel="noopener"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.93L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.51 2 12.04 2Zm5.79 14.02c-.24.68-1.4 1.32-1.93 1.4-.49.08-1.11.11-1.79-.11-.41-.13-.94-.31-1.62-.6-2.86-1.24-4.72-4.13-4.86-4.32-.14-.19-1.16-1.55-1.16-2.96 0-1.4.73-2.09.99-2.38.26-.28.57-.35.76-.35h.55c.18 0 .41-.03.63.48.24.57.81 1.98.88 2.12.07.14.12.31.02.5-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.13-.28.28-.12.55.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.28.36-.23.6-.14.24.09 1.55.73 1.82.86.27.14.44.2.51.31.07.12.07.68-.17 1.36Z"/></svg>
+      RSVP on WhatsApp
+    </a>
+    <p class="rsvp-caption">Or call/text Russ directly: 954-618-3059</p>
+
+    <div class="calendar-row">
+      <button class="calendar-btn" type="button" id="addToCalendar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+        Apple / Outlook
+      </button>
+      <a
+        class="calendar-btn"
+        href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Bizcochos%20%26%20Bubbly%20%E2%80%94%20Juan%27s%2041st%20Birthday&dates=20260906T100000/20260906T120000&details=Bizcochos%2C%20mimosas%2C%20bellinis%2C%20coffee%2C%20and%20more!%20RSVP%20to%20Russ%20at%20954-618-3059.&location=835%20Harrison%20Street%2C%20Hollywood%2C%20FL%2033019&ctz=America/New_York"
+        target="_blank"
+        rel="noopener"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+        Google Calendar
+      </a>
+    </div>
+    <p class="rsvp-caption">Apple/Outlook includes a 90-minute reminder</p>
+  </div>
+</main>
+
+<footer>
+  <svg class="sun-mini" viewBox="0 0 200 200" aria-hidden="true">
+    <circle cx="100" cy="100" r="46" fill="var(--sun-deep)"/>
+  </svg>
+  bizcochosandbubbly.com
+</footer>
+
+<script>
+  // Build the 16 rays of the Sol de Mayo programmatically to keep the markup lean
+  (function(){
+    const raysGroup = document.getElementById('rays');
+    if(!raysGroup) return;
+    const cx = 100, cy = 100, count = 16;
+    const inner = 52, outerLong = 92, outerShort = 76;
+    let d = "";
+    for(let i = 0; i < count; i++){
+      const angle = (i / count) * 2 * Math.PI - Math.PI/2;
+      const outer = (i % 2 === 0) ? outerLong : outerShort;
+      const width = 0.16;
+      const a1 = angle - width, a2 = angle + width;
+      const x1 = cx + inner * Math.cos(a1), y1 = cy + inner * Math.sin(a1);
+      const x2 = cx + outer * Math.cos(angle), y2 = cy + outer * Math.sin(angle);
+      const x3 = cx + inner * Math.cos(a2), y3 = cy + inner * Math.sin(a2);
+      d += `M${x1},${y1} L${x2},${y2} L${x3},${y3} Z `;
+    }
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", d);
+    raysGroup.appendChild(path);
+  })();
+
+  // Add to Calendar — builds an .ics file with a 90-minute-before reminder
+  (function(){
+    const btn = document.getElementById('addToCalendar');
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Bizcochos and Bubbly//EN',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        'UID:' + Date.now() + '@bizcochosandbubbly.com',
+        'DTSTAMP:' + icsUtcNow(),
+        'DTSTART;TZID=America/New_York:20260906T100000',
+        'DTEND;TZID=America/New_York:20260906T120000',
+        'SUMMARY:Bizcochos & Bubbly — Juan\'s 41st Birthday',
+        'DESCRIPTION:Bizcochos\\, mimosas\\, bellinis\\, coffee\\, and more! RSVP to Russ at 954-618-3059.',
+        'LOCATION:835 Harrison Street\\, Hollywood\\, FL 33019',
+        'BEGIN:VALARM',
+        'ACTION:DISPLAY',
+        'DESCRIPTION:Bizcochos & Bubbly starts in 90 minutes',
+        'TRIGGER:-PT1H30M',
+        'END:VALARM',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'bizcochos-and-bubbly.ics';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    function icsUtcNow(){
+      const d = new Date();
+      return d.toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+    }
+  })();
+</script>
+
+</body>
+</html>
