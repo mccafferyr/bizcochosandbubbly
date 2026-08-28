@@ -316,6 +316,35 @@
   }
   .note strong{ color:var(--ink); font-weight:600; }
 
+  .fun-callout{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    background: rgba(240,180,41,0.12);
+    border: 1.5px dashed var(--sun-deep);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin: 22px 0 4px;
+  }
+  .fun-callout-icon{
+    font-size: 1.7rem;
+    line-height:1;
+    flex:0 0 auto;
+    margin-top:1px;
+  }
+  .fun-callout-text{
+    margin:0;
+    font-size:0.98rem;
+    line-height:1.5;
+    color: var(--ink);
+  }
+  .fun-callout-text strong{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+
   .rsvp-wrap{
     text-align:center;
     padding: 6px 0 4px;
@@ -492,8 +521,12 @@
       <div>
         <p class="detail-label">What to expect</p>
         <p class="detail-value">Bizcochos, mimosas, bellinis, coffee, and more!</p>
-        <p class="detail-sub">Bizcochos: flaky, buttery Uruguayan pastries — think croissant meets breakfast pastry.</p>
       </div>
+    </div>
+
+    <div class="fun-callout">
+      <span class="fun-callout-icon" aria-hidden="true">🥐</span>
+      <p class="fun-callout-text"><strong>What's a bizcocho?</strong> Flaky, buttery, and reason enough to set an alarm — think croissant, but Uruguay did it first.</p>
     </div>
 
     <p class="note">Come casual, come hungry. <strong>No gifts needed</strong> — just bring your appetite and help us send Juan into 41 the right way.</p>
